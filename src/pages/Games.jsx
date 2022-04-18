@@ -9,8 +9,8 @@ const Games = () => {
 			<h1>DragNDrop</h1>
 			<div
 				style={{
-					width: '435px',
-					height: '435px',
+					width: '445px',
+					height: '445px',
 					display: 'flex',
 					flexWrap: 'wrap',
 				}}

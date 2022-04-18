@@ -1,11 +1,12 @@
 import React from 'react';
+import {getColorFromPosition} from "./service";
 
-const BoardSquare = ({position, color, children, movePiece, cleanBoard}) => {
+const BoardSquare = ({position, color, children, movePiece, cleanBoard, setColor}) => {
 
 	function dragOverHandler(e) {
 		e.preventDefault();
-		if (!children) {e.target.style.backgroundColor = 'yellow';}
-		else (e.target.style.backgroundColor = 'red')
+		if (!children && color !== 'green') {setColor(position, 'yellow')}
+		else if (children) {setColor(position, 'red')}
 		return undefined;
 	}
 
@@ -18,7 +19,9 @@ const BoardSquare = ({position, color, children, movePiece, cleanBoard}) => {
 
 	function dragLeaveHandler(e) {
 		e.preventDefault();
-		e.target.style.backgroundColor = color;
+		if (color === 'yellow' || color === 'red') {
+			setColor(position, getColorFromPosition(position));
+		}
 		return undefined;
 	}
 

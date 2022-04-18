@@ -1,7 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {convertIndexToPosition, convertPositionToIndex} from "../service";
+import {PiecesContext} from "../context";
 
-const King = ({position, onDragStart}) => {
+const King = ({position, onDragStart, color}) => {
+	const pieces = useContext(PiecesContext);
+	let availableDirections = {
+		up: true,
+		down: true,
+		left: true,
+		right: true,
+		upLeft: true,
+		upRight: true,
+		downLeft: true,
+		downRight: true
+	};
+
 	const getAvailableMoves = () => {
 		const moves = [];
 		const [x, y] = convertPositionToIndex(position);
@@ -11,25 +24,69 @@ const King = ({position, onDragStart}) => {
 				moves.push(convertIndexToPosition([x, y]));
 			}
 		};
-		addMove(x - 1, y - 1);
-		addMove(x - 1, y);
-		addMove(x - 1, y + 1);
-		addMove(x, y - 1);
-		addMove(x, y + 1);
-		addMove(x + 1, y - 1);
-		addMove(x + 1, y);
-		addMove(x + 1, y + 1);
+
+		if (pieces[convertIndexToPosition([x - 1, y - 1])]) {
+			if (pieces[convertIndexToPosition([x - 1, y - 1])].color !== color) {
+				addMove(x - 1, y - 1);
+			}
+		} else {
+			addMove(x - 1, y - 1);
+		}
+		if (pieces[convertIndexToPosition([x - 1, y + 1])]) {
+			if (pieces[convertIndexToPosition([x - 1, y + 1])].color !== color) {
+				addMove(x - 1, y + 1);
+			}
+		} else {
+			addMove(x - 1, y + 1);
+		}
+		if (pieces[convertIndexToPosition([x, y - 1])]) {
+			if (pieces[convertIndexToPosition([x, y - 1])].color !== color) {
+				addMove(x, y - 1);
+			}
+		} else {
+			addMove(x, y - 1);
+		}
+		if (pieces[convertIndexToPosition([x, y + 1])]) {
+			if (pieces[convertIndexToPosition([x, y + 1])].color !== color) {
+				addMove(x, y + 1);
+			}
+		} else {
+			addMove(x, y + 1);
+		}
+		if (pieces[convertIndexToPosition([x + 1, y + 1])]) {
+			if (pieces[convertIndexToPosition([x + 1, y + 1])].color !== color) {
+				addMove(x + 1, y + 1);
+			}
+		} else {
+			addMove(x + 1, y + 1);
+		}
+		if (pieces[convertIndexToPosition([x + 1, y - 1])]) {
+			if (pieces[convertIndexToPosition([x + 1, y - 1])].color !== color) {
+				addMove(x + 1, y - 1);
+			}
+		} else {
+			addMove(x + 1, y - 1);
+		}
+		if (pieces[convertIndexToPosition([x + 1, y])]) {
+			if (pieces[convertIndexToPosition([x + 1, y])].color !== color) {
+				addMove(x + 1, y);
+			}
+		} else {
+			addMove(x + 1, y);
+		}
+
 		return moves;
 	};
 
-	const iconUrl = " https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg";
+	const iconUrl = color === 'white' ? "https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg" : 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg';
 
 
 	return (
 		<div
-			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`}}
-			onDragStart={(e) => onDragStart(e, King, position, getAvailableMoves())}
+			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`, cursor: 'grab'}}
+			onDragStart={(e) => onDragStart(e, King, position, color, getAvailableMoves())}
 			draggable={true}
+
 		>
 		</div>
 	);
