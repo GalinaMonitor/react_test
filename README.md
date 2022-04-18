@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can see live demo on [My GitHub Page](https://galinamonitor.github.io/react_test/).
 
 ## Available Scripts
 
