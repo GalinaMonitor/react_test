@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {convertIndexToPosition, convertPositionToIndex} from "../service";
 import {PiecesContext} from "../context";
 
-const Pawn = ({position, onDragStart, color}) => {
+const Pawn = ({position, onDragStart, onDragEnd, color}) => {
 	const pieces = useContext(PiecesContext);
 
 	const getAvailableMoves = () => {
@@ -53,6 +53,7 @@ const Pawn = ({position, onDragStart, color}) => {
 		<div
 			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`, cursor: 'grab'}}
 			onDragStart={(e) => onDragStart(e, Pawn, position, color, getAvailableMoves())}
+			onDragEnd={(e) => onDragEnd(e)}
 			draggable={true}
 
 		>

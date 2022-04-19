@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Piece = ({piece, position, onDragStart, color}) => {
+const Piece = ({piece, position, onDragStart, onDragEnd, color}) => {
 	const PieceType = piece;
 	return (
-		<PieceType position={position} onDragStart={onDragStart} color={color}/>
+		<PieceType position={position} onDragStart={onDragStart} onDragEnd={onDragEnd} color={color}/>
 	);
 };
 

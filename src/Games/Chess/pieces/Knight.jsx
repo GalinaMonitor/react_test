@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {convertIndexToPosition, convertPositionToIndex} from "../service";
 import {PiecesContext} from "../context";
 
-const Knight = ({position, onDragStart, color}) => {
+const Knight = ({position, onDragStart, onDragEnd, color}) => {
 	const pieces = useContext(PiecesContext);
 
 	const getAvailableMoves = () => {
@@ -49,8 +49,8 @@ const Knight = ({position, onDragStart, color}) => {
 		<div
 			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`, cursor: 'grab'}}
 			onDragStart={(e) => onDragStart(e, Knight, position, color, getAvailableMoves())}
+			onDragEnd={(e) => onDragEnd(e)}
 			draggable={true}
-
 		>
 		</div>
 	);

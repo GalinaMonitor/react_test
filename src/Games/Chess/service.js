@@ -12,7 +12,9 @@ export const getSquaresData = () => {
 			squaresData[String.fromCharCode(65 + x) + String(y)] = {
 				position: String.fromCharCode(65 + x) + String(y),
 				color: (x + y) % 2 === 0 ? 'white' : 'black',
-				piece: null
+				highlightColor: null,
+				dragOverColor: null,
+				piece: null,
 
 			}
 		}

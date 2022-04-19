@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {convertIndexToPosition, convertPositionToIndex} from "../service";
 import {PiecesContext} from "../context";
 
-const Queen = ({position, onDragStart, color}) => {
+const Queen = ({position, onDragStart, onDragEnd, color}) => {
 	const pieces = useContext(PiecesContext);
 	let availableDirections = {
 		up: true,
@@ -135,6 +135,7 @@ const Queen = ({position, onDragStart, color}) => {
 		<div
 			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`, cursor: 'grab'}}
 			onDragStart={(e) => onDragStart(e, Queen, position, color, getAvailableMoves())}
+			onDragEnd={(e) => onDragEnd(e)}
 			draggable={true}
 		>
 		</div>

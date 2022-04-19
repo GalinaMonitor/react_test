@@ -2,13 +2,9 @@ import React, {useContext} from 'react';
 import {convertIndexToPosition, convertPositionToIndex} from "../service";
 import {PiecesContext} from "../context";
 
-const Bishop = ({position, onDragStart, color}) => {
+const Bishop = ({position, onDragStart, onDragEnd, color}) => {
 	const pieces = useContext(PiecesContext);
 	let availableDirections = {
-		up: true,
-		down: true,
-		left: true,
-		right: true,
 		upLeft: true,
 		upRight: true,
 		downLeft: true,
@@ -87,6 +83,7 @@ const Bishop = ({position, onDragStart, color}) => {
 		<div
 			style={{width: '100%', height: '100%', backgroundImage: `url(${iconUrl})`, cursor: 'grab'}}
 			onDragStart={(e) => onDragStart(e, Bishop, position, color, getAvailableMoves())}
+			onDragEnd={(e) => onDragEnd(e)}
 			draggable={true}
 		>
 		</div>
